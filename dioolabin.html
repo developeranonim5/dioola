@@ -26,16 +26,16 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">WHAT WE DO</a>
+                    <a class="nav-link" href="./index.html">WHAT WE DO</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">RESEARCH AND REPORT</a>
+                    <a class="nav-link" href="./index.html">RESEARCH AND REPORT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">STORIES</a>
+                    <a class="nav-link" href="./index.html">STORIES</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">DIOOLA BIN</a>
+                    <a class="nav-link" href="./dioolabin.html">DIOOLA BIN</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -68,38 +68,66 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Device Ke-</th>
-                        <th scope="col">Temperature Sensor</th>
-                        <th scope="col">Heigh Sensor</th>
-                        <th scope="col">Soil Sensor</th>
+                        <th scope="col">Temperature Sensor (°C)</th>
+                        <th scope="col">Heigh Sensor (Cm)</th>
+                        <th scope="col">Soil Sensor (RH)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td id="Temp"></td>
+                        <td id="Heigh">/td>
+                        <td id="Soil"></td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
+                        <td>Blank</td>
+                        <td>Blank</td>
+                        <td>Blank</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
+                        <td>Blank</td>
+                        <td>Blank</td>
+                        <td>Blank</td>
+
                     </tr>
                 </tbody>
             </table>
 
         </div>
-
     </div>
 
 
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyCOZNXqVk7fTbSpYt_NS7i0EDqdSnP4WyM",
+            authDomain: "diooabin.firebaseapp.com",
+            databaseURL: "https://diooabin.firebaseio.com",
+            projectId: "diooabin",
+            storageBucket: "diooabin.appspot.com",
+            messagingSenderId: "916088397728",
+            appId: "1:916088397728:web:9f1ad9d9f730348d9a8ec5",
+            measurementId: "G-VHMV53PPPY"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        var bigTemp = document.getElementById('Temp');
+        var dbRef = firebase.database().ref().child('valTemp');
+
+        var bigHeigh = document.getElementById('Heigh');
+        var dbHeigh = firebase.database().ref().child('valHeigh');
+
+        var bigSoil = document.getElementById('Soil');
+        var dbSoil = firebase.database().ref().child('valSoil');
+
+        dbRef.on('value', snap => bigTemp.innerText = snap.val());
+        dbHeigh.on('value', snap => bigHeigh.innerText = snap.val());
+        dbSoil.on('value', snap => bigSoil.innerText = snap.val());
+    </script>
 
 
 
